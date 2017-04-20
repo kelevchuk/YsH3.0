@@ -2,7 +2,9 @@ package entity;
 
 import javax.persistence.*;
 
-
+/**
+ * Created by LevchukK.E. on 19.04.17.
+ */
 @Entity
 @Table(name = "full_clubs", schema = "public", catalog = "ysh_db")
 public class FullClubsEntity {
@@ -15,7 +17,7 @@ public class FullClubsEntity {
     private String contactInf;
 
     @Id
-    @Column(name = "club_id", nullable = false)
+    @Column(name = "club_id")
     public long getClubId() {
         return clubId;
     }
@@ -25,7 +27,7 @@ public class FullClubsEntity {
     }
 
     @Basic
-    @Column(name = "name", nullable = true, length = -1)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -35,7 +37,7 @@ public class FullClubsEntity {
     }
 
     @Basic
-    @Column(name = "sport_fk", nullable = true)
+    @Column(name = "sport_fk")
     public Long getSportFk() {
         return sportFk;
     }
@@ -45,7 +47,7 @@ public class FullClubsEntity {
     }
 
     @Basic
-    @Column(name = "age", nullable = true)
+    @Column(name = "age")
     public Long getAge() {
         return age;
     }
@@ -55,7 +57,7 @@ public class FullClubsEntity {
     }
 
     @Basic
-    @Column(name = "note_fk", nullable = true)
+    @Column(name = "note_fk")
     public Long getNoteFk() {
         return noteFk;
     }
@@ -65,7 +67,7 @@ public class FullClubsEntity {
     }
 
     @Basic
-    @Column(name = "address", nullable = true, length = -1)
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -75,7 +77,7 @@ public class FullClubsEntity {
     }
 
     @Basic
-    @Column(name = "contact_inf", nullable = true, length = -1)
+    @Column(name = "contact_inf")
     public String getContactInf() {
         return contactInf;
     }

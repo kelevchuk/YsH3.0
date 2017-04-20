@@ -3,7 +3,7 @@ package entity;
 import javax.persistence.*;
 
 /**
- * Created by armen on 18.04.2017.
+ * Created by LevchukK.E. on 19.04.17.
  */
 @Entity
 @Table(name = "age", schema = "public", catalog = "ysh_db")
@@ -12,7 +12,7 @@ public class AgeEntity {
     private String value;
 
     @Id
-    @Column(name = "id_age", nullable = false)
+    @Column(name = "id_age")
     public long getIdAge() {
         return idAge;
     }
@@ -22,7 +22,7 @@ public class AgeEntity {
     }
 
     @Basic
-    @Column(name = "value", nullable = true, length = -1)
+    @Column(name = "value")
     public String getValue() {
         return value;
     }

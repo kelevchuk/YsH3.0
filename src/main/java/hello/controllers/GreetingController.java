@@ -1,9 +1,11 @@
-package hello;
+package hello.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+import hello.HibernateUtil;
+import hello.models.Greeting;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -25,7 +27,7 @@ public class GreetingController {
             session.beginTransaction();
             Query query = session.createQuery("select noteName from NotesEntity");
             for (Object a : query.list()) {
-                list.add(a);
+                list.add(a+";   ");
             }
         }
             finally {
@@ -35,9 +37,10 @@ public class GreetingController {
             }
         StringBuffer builder = new StringBuffer();
         for (Object o : list) {
-            builder.append(o+"<br>");
+            builder.append(o);
         }
         String s = builder.substring(0);
         return new Greeting(s);
+
     }
 }
