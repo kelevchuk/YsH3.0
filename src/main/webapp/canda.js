@@ -1,8 +1,8 @@
 
 $(document).ready(function() {
     $.ajax({
-        url: "value"
+        url: "/address"
     }).then(function(data) {
-        $('.value-sport').append(data.content);
+        $('.address-sport').append(data.sport);
     });
 });

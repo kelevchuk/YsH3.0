@@ -1,45 +1,44 @@
 package hello.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import hello.HibernateUtil;
+import hello.models.AllDistricts;
 import hello.models.Greeting;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by LevchukK.E. on 21.04.17.
+ */
 @RestController
-public class GreetingController {
-
-    @RequestMapping("/greeting")
-    public Greeting greeting(String sas) {
-
+public class AllDistrictController {
+    @RequestMapping("/alldistrict")
+    public AllDistricts allDistricts(String district){
         Session session =null;
         List list = new ArrayList();
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            Query query = session.createQuery("select  from ");
+            Query query = session.createQuery("select noteName from NotesEntity");
             for (Object a : query.list()) {
                 list.add(a+";   ");
             }
         }
-            finally {
-                if (session !=null && session.isOpen()) {
-                    session.close();
-                }
+        finally {
+            if (session !=null && session.isOpen()) {
+                session.close();
             }
+        }
         StringBuffer builder = new StringBuffer();
         for (Object o : list) {
             builder.append(o);
         }
         String s = builder.substring(0);
-        return new Greeting(s);
+        return new AllDistricts(s);
 
+        }
     }
-}

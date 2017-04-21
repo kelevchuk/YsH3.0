@@ -10,7 +10,6 @@
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.current_session_context_class">thread</property>
-
         <property name="connection.username">postgres</property>
         <property name="connection.password">2577kkll</property>
 
@@ -19,6 +18,7 @@
         <mapping class="entity.FullClubsEntity"/>
         <mapping class="entity.NotesEntity"/>
         <mapping class="entity.SportTypeEntity"/>
+        <mapping class="entity.CityEntity"/>
 
 
         <!--<property name="connection.username">postgres</property>-->

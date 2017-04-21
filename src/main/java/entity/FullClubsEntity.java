@@ -3,7 +3,7 @@ package entity;
 import javax.persistence.*;
 
 /**
- * Created by LevchukK.E. on 19.04.17.
+ * Created by LevchukK.E. on 21.04.17.
  */
 @Entity
 @Table(name = "full_clubs", schema = "public", catalog = "ysh_db")
@@ -15,6 +15,7 @@ public class FullClubsEntity {
     private Long noteFk;
     private String address;
     private String contactInf;
+    private Long cityFk;
 
     @Id
     @Column(name = "club_id")
@@ -86,6 +87,16 @@ public class FullClubsEntity {
         this.contactInf = contactInf;
     }
 
+    @Basic
+    @Column(name = "city_fk")
+    public Long getCityFk() {
+        return cityFk;
+    }
+
+    public void setCityFk(Long cityFk) {
+        this.cityFk = cityFk;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -100,6 +111,7 @@ public class FullClubsEntity {
         if (noteFk != null ? !noteFk.equals(that.noteFk) : that.noteFk != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
         if (contactInf != null ? !contactInf.equals(that.contactInf) : that.contactInf != null) return false;
+        if (cityFk != null ? !cityFk.equals(that.cityFk) : that.cityFk != null) return false;
 
         return true;
     }
@@ -113,6 +125,7 @@ public class FullClubsEntity {
         result = 31 * result + (noteFk != null ? noteFk.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (contactInf != null ? contactInf.hashCode() : 0);
+        result = 31 * result + (cityFk != null ? cityFk.hashCode() : 0);
         return result;
     }
 }

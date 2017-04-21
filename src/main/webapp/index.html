@@ -11,7 +11,7 @@
 <body>
 <div>
 <h4>Вид спорта:</h4>
-<form action="value" method="get">
+<form action="/address" method="get">
     <p><select size="" name="sport">
         <option disabled>Выберите вид спорта</option>
         <option value="Айкидо">Айкидо</option>
@@ -113,20 +113,79 @@
 
     </select></p>
     <p><input type="submit" value="Применить фильтр"></p>
-
-
 </form>
-
-
 </div>
-
-
 </body>
+<body>
+<div>
+    <p class="address-sport"></n></p>
+</div>
+</body>
+
 
 
 <body>
 <div>
-    <p class="greeting-content"></n></p>
+    <h4>Возростная категория:</h4>
+    <form action="/age" method="get">
+        <p><select size="" name="age">
+            <option disabled>Выберите вид спорта</option>
+            <option value="1">Дети</option>
+            <option value="2">Юниоры</option>
+            <option value="3">Молодежь</option>
+            <option value="4">Взрослые</option>
+        </select></p>
+        <p><input type="submit" value="Применить фильтр"></p>
+    </form>
 </div>
 </body>
+
+<body>
+<div>
+    <h4>Районы:</h4>
+    <form action="/distoclub" method="get">
+        <p><select size="" name="distr">
+            <option disabled>Выберите район</option>
+            <option value="Василиостровский" selected>Василиостровский</option>
+            <option value="Московский" selected>Московский</option>
+            <option value="Адмиралтейский" selected>Адмиралтейский</option>
+            <option value="Фрунзенский" selected>Фрунзенский</option>
+            <option value="Красносельский" selected>Красносельский</option>
+            <option value="Невский" selected>Невский</option>
+            <option value="Выборгский" selected>Выборгский</option>
+            <option value="Курортный" selected>Курортный</option>
+            <option value="Колпинский" selected>Колпинский</option>
+            <option value="Центральный" selected>Центральный</option>
+            <option value="Пушкинский" selected>Пушкинский</option>
+            <option value="Петродворцовый" selected>Петродворцовый</option>
+            <option value="Калиниский" selected>Калининский</option>
+            <option value="Красногвардейский" selected>Красногвардейский</option>
+        </select></p>
+        <p><input type="submit" value="Применить фильтр"></p>
+    </form>
+</div>
+</body>
+
+<body>
+<div>
+    <h4>Город:</h4>
+    <form action="/citytoclub" method="get">
+        <p><select size="" name="city">
+            <option disabled>Выберите район</option>
+            <option value="Санкт-Петербург" selected>Санкт-Петербург</option>
+            <option value="Москва" selected>Москва</option>
+            <option value="Владивосток" selected>Владивосток</option>
+            <option value="Сочи" selected>Сочи</option>
+            <option value="Нижневартовск" selected>Нижневартовск</option>
+        </select></p>
+        <p><input type="submit" value="Применить фильтр"></p>
+    </form>
+</div>
+</body>
+
+
+
+
+
+
 </html>
