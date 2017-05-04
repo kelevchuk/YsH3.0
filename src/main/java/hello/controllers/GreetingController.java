@@ -16,19 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingController {
 
-    @RequestMapping("/greeting")
+    @RequestMapping("/test")
     public Greeting greeting(String sas) {
 
         Session session =null;
-        List list = new ArrayList();
+        List list = new ArrayList<String>();
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            Query query = session.createQuery("select  from ");
+            Query query = session.createQuery("select d.nameDistrict from AddressEntity add join add.districtByDistrict d where add.id=1");
             for (Object a : query.list()) {
-                list.add(a+";   ");
+                list.add(a + ";   ");
             }
         }
+
             finally {
                 if (session !=null && session.isOpen()) {
                     session.close();

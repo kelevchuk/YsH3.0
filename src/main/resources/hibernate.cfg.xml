@@ -14,11 +14,18 @@
         <property name="connection.password">2577kkll</property>
 
 
+        <mapping class="entity.AddressEntity"/>
         <mapping class="entity.AgeEntity"/>
-        <mapping class="entity.FullClubsEntity"/>
-        <mapping class="entity.NotesEntity"/>
-        <mapping class="entity.SportTypeEntity"/>
         <mapping class="entity.CityEntity"/>
+        <mapping class="entity.ClubEntity"/>
+        <mapping class="entity.ClubAgeEntity"/>
+        <mapping class="entity.ClubNumberEntity"/>
+        <mapping class="entity.ClubSportEntity"/>
+        <mapping class="entity.ClubTrainerEntity"/>
+        <mapping class="entity.DistrictEntity"/>
+        <mapping class="entity.NumberEntity"/>
+        <mapping class="entity.SportTypeEntity"/>
+        <mapping class="entity.TrainerEntity"/>
 
 
         <!--<property name="connection.username">postgres</property>-->

@@ -1,34 +1,36 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by LevchukK.E. on 19.04.17.
+ * Created by LevchukK.E. on 04.05.17.
  */
 @Entity
 @Table(name = "sport_type", schema = "public", catalog = "ysh_db")
 public class SportTypeEntity {
-    private long id;
-    private String sportName;
+    private long idSport;
+    private String nameSport;
+    private Collection<ClubSportEntity> clubSportsByIdSport;
 
     @Id
-    @Column(name = "id")
-    public long getId() {
-        return id;
+    @Column(name = "id_sport", nullable = false)
+    public long getIdSport() {
+        return idSport;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdSport(long idSport) {
+        this.idSport = idSport;
     }
 
     @Basic
-    @Column(name = "sport_name")
-    public String getSportName() {
-        return sportName;
+    @Column(name = "name_sport", nullable = true, length = -1)
+    public String getNameSport() {
+        return nameSport;
     }
 
-    public void setSportName(String sportName) {
-        this.sportName = sportName;
+    public void setNameSport(String nameSport) {
+        this.nameSport = nameSport;
     }
 
     @Override
@@ -38,16 +40,25 @@ public class SportTypeEntity {
 
         SportTypeEntity that = (SportTypeEntity) o;
 
-        if (id != that.id) return false;
-        if (sportName != null ? !sportName.equals(that.sportName) : that.sportName != null) return false;
+        if (idSport != that.idSport) return false;
+        if (nameSport != null ? !nameSport.equals(that.nameSport) : that.nameSport != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (sportName != null ? sportName.hashCode() : 0);
+        int result = (int) (idSport ^ (idSport >>> 32));
+        result = 31 * result + (nameSport != null ? nameSport.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "sportTypeByIdSport")
+    public Collection<ClubSportEntity> getClubSportsByIdSport() {
+        return clubSportsByIdSport;
+    }
+
+    public void setClubSportsByIdSport(Collection<ClubSportEntity> clubSportsByIdSport) {
+        this.clubSportsByIdSport = clubSportsByIdSport;
     }
 }

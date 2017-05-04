@@ -2,10 +2,10 @@ package hello.controllers;
 
 import hello.HibernateUtil;
 import hello.models.AllDistricts;
-import hello.models.Greeting;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -17,13 +17,14 @@ import java.util.List;
 @RestController
 public class AllDistrictController {
     @RequestMapping("/alldistrict")
-    public AllDistricts allDistricts(String district){
+    public AllDistricts allDistricts(@RequestParam(defaultValue ="1", value = "city") String city){
+
         Session session =null;
         List list = new ArrayList();
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            Query query = session.createQuery("select noteName from NotesEntity");
+            Query query = session.createQuery("select nameDistrict from DistrictEntity");
             for (Object a : query.list()) {
                 list.add(a+";   ");
             }

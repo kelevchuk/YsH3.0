@@ -1,18 +1,20 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by LevchukK.E. on 21.04.17.
+ * Created by LevchukK.E. on 04.05.17.
  */
 @Entity
 @Table(name = "city", schema = "public", catalog = "ysh_db")
 public class CityEntity {
     private long idCity;
     private String nameCity;
+    private Collection<AddressEntity> addressesByIdCity;
 
     @Id
-    @Column(name = "id_city")
+    @Column(name = "id_city", nullable = false)
     public long getIdCity() {
         return idCity;
     }
@@ -22,7 +24,7 @@ public class CityEntity {
     }
 
     @Basic
-    @Column(name = "name_city")
+    @Column(name = "name_city", nullable = true, length = -1)
     public String getNameCity() {
         return nameCity;
     }
@@ -49,5 +51,14 @@ public class CityEntity {
         int result = (int) (idCity ^ (idCity >>> 32));
         result = 31 * result + (nameCity != null ? nameCity.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "cityByCity")
+    public Collection<AddressEntity> getAddressesByIdCity() {
+        return addressesByIdCity;
+    }
+
+    public void setAddressesByIdCity(Collection<AddressEntity> addressesByIdCity) {
+        this.addressesByIdCity = addressesByIdCity;
     }
 }

@@ -26,7 +26,7 @@ public class AllSportsController {
                 SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
                 session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction();
-                Query query = session.createQuery("select sportName from SportTypeEntity ");
+                Query query = session.createQuery("select st.nameSport from SportTypeEntity st ");
                 int i = 1;
                 for (Object a : query.list()) {
                     list.add(i+": "+a+";   ");

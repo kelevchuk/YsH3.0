@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -15,18 +16,20 @@ import java.util.List;
 /**
  * Created by LevchukK.E. on 21.04.17.
  */
-
+//TODO все клубы по городу
 @RestController
-public class AllClubsController {
-    @RequestMapping("/allclubs")
-    public AllClubs allClubs(String nameClub){
+public class AllClubsInCityController {
+    @RequestMapping("/allclubsc")
+    public AllClubs allClubs(@RequestParam(defaultValue = "1",value = "city") Long city, String nameClub){
         Session session =null;
         List list = new ArrayList();
         try {
             SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            Query query = session.createQuery("select name from FullClubsEntity ");
+            Query query = session.createQuery("select cl.nameClub from ClubEntity cl " +
+                    "join cl.addressByIdClub ad " +
+                    "join ad.cityByCity cit where cit.id=:city").setParameter("city",city);
             int i = 1;
             for (Object a : query.list()) {
                 list.add(i+": "+a+";   ");

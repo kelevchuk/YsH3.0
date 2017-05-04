@@ -15,9 +15,8 @@ import java.util.List;
  */
 @RestController
 public class AgeController {
-    @RequestMapping(value = "/age", method = RequestMethod.GET)
-    @ResponseBody
-    public Age age(@RequestParam("age") long age){
+    @RequestMapping("/age")
+    public Age age( String age){
         Session session = null;
         List list1 = new ArrayList<String>();
         try {
@@ -25,8 +24,7 @@ public class AgeController {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
 
-            Query query1 = session.createQuery("select name from FullClubsEntity where age=:age")
-                    .setParameter("age",age);
+            Query query1 = session.createQuery("select a.valueAge from AgeEntity a ");
             for (Object a : query1.list()) {
                 list1.add(a);
             }
@@ -38,7 +36,7 @@ public class AgeController {
         }
         StringBuffer builder1 = new StringBuffer();
         for (Object o : list1) {
-            builder1.append(o);
+            builder1.append(o+" ");
         }
 
 
