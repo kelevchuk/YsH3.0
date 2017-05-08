@@ -4,8 +4,8 @@ package hello.models;
  * Created by LevchukK.E. on 21.04.17.
  */
 public class AllCity {
-    private final String nameCity;
+    private final Object nameCity;
 
-    public AllCity(String nameCity){this.nameCity = nameCity;}
-    public String getNameCity(){return nameCity;}
+    public AllCity(Object nameCity){this.nameCity = nameCity;}
+    public Object getNameCity(){return nameCity;}
 }

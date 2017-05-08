@@ -16,32 +16,23 @@ import java.util.List;
 @RestController
 public class AgeController {
     @RequestMapping("/age")
-    public Age age( String age){
+    public Age age( Object age){
         Session session = null;
-        List list1 = new ArrayList<String>();
+        ArrayList<Object> query = null;
         try {
 
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
 
-            Query query1 = session.createQuery("select a.valueAge from AgeEntity a ");
-            for (Object a : query1.list()) {
-                list1.add(a);
-            }
+            query = (ArrayList<Object>) session.createQuery("select a.valueAge from AgeEntity a ").list();
+
         }
         finally{
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
-        StringBuffer builder1 = new StringBuffer();
-        for (Object o : list1) {
-            builder1.append(o+" ");
-        }
 
-
-
-        String a = builder1.substring(0);
-        return new Age(a);
+        return new Age(query);
     }
 }

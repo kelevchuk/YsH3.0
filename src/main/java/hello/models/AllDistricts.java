@@ -4,8 +4,8 @@ package hello.models;
  * Created by LevchukK.E. on 21.04.17.
  */
 public class AllDistricts {
-    private final String district;
+    private final Object district;
 
-    public AllDistricts(String district){this.district = district;}
-    public String getDistrict(){return district;}
+    public AllDistricts(Object district){this.district = district;}
+    public Object getDistrict(){return district;}
 }

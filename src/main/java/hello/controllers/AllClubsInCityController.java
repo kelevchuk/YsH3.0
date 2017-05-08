@@ -1,17 +1,13 @@
 package hello.controllers;
 
 import hello.HibernateUtil;
-import hello.models.AllClubs;
+import hello.models.AllClubsCity;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by LevchukK.E. on 21.04.17.
@@ -20,33 +16,23 @@ import java.util.List;
 @RestController
 public class AllClubsInCityController {
     @RequestMapping("/allclubsc")
-    public AllClubs allClubs(@RequestParam(defaultValue = "1",value = "city") Long city, String nameClub){
+    public AllClubsCity allClubsCity(@RequestParam(defaultValue = "1",value = "city") Long city, Object nameClub){
         Session session =null;
-        List list = new ArrayList();
+        ArrayList<Object> query = null;
         try {
-            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            Query query = session.createQuery("select cl.nameClub from ClubEntity cl " +
+            query = (ArrayList<Object>) session.createQuery("select cl.nameClub from ClubEntity cl " +
                     "join cl.addressByIdClub ad " +
-                    "join ad.cityByCity cit where cit.id=:city").setParameter("city",city);
-            int i = 1;
-            for (Object a : query.list()) {
-                list.add(i+": "+a+";   ");
-                i++;
-            }
+                    "join ad.cityByCity cit where cit.id=:city").setParameter("city",city).list();
+
         }
         finally {
             if (session !=null && session.isOpen()) {
                 session.close();
             }
         }
-        StringBuffer builder = new StringBuffer();
-        for (Object o : list) {
-            builder.append(o);
-        }
-        String s = builder.substring(0);
-        return new AllClubs(s);
+        return new AllClubsCity(query);
     }
 
 }

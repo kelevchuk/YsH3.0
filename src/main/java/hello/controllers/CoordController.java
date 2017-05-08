@@ -23,32 +23,25 @@ public class CoordController {
     public Coord coord (@RequestParam(defaultValue = "1", value = "city") Long city,
                         @RequestParam("club") Long club, Float x,Float y) {
         Session session = null;
-        List cx = new ArrayList<Float>();
-        List cy = new ArrayList<Float>();
+        ArrayList<Float> coordx = null;
+        ArrayList<Float> coordy = null;
         try {
-            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            Query queryX = session.createQuery("select ad.coordX from ClubEntity cl " +
+            coordx = (ArrayList<Float>) session.createQuery("select ad.coordX from ClubEntity cl " +
                     "join cl.addressByIdClub ad " +
                     "join ad.cityByCity cit" +
                     " where cit.id=:city and cl.id=:club ")
                     .setParameter("city",city)
-                    .setParameter("club",club);
-           //cx = (List) queryX;
-            for (Object f:queryX.list()){
-               cx.add(f);
-            }
-            Query queryY = session.createQuery("select ad.coordY from ClubEntity cl " +
+                    .setParameter("club",club).list();
+
+            coordy = (ArrayList<Float>) session.createQuery("select ad.coordY from ClubEntity cl " +
                     "join cl.addressByIdClub ad " +
                     "join ad.cityByCity cit" +
                     " where cit.id=:city and cl.id=:club ")
                     .setParameter("city",city)
-                    .setParameter("club",club);
-            //cy = (List) queryY;
-            for (Object f:queryY.list()){
-                cy.add(f);
-            }
+                    .setParameter("club",club).list();
+
 
         }
         finally {
@@ -56,9 +49,8 @@ public class CoordController {
                 session.close();
             }
         }
-        Float x1=(Float)cx.get(0);
-        Float y1= (Float)cy.get(0);
-        return new Coord(x1,y1);
+
+        return new Coord(coordx.get(0),coordy.get(0));
     }
 
 }

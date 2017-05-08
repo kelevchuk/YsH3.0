@@ -16,28 +16,22 @@ import java.util.List;
 @RestController
 public class AllCityController {
     @RequestMapping("/allcity")
-    public AllCity allCity(String nameCity){
+    public AllCity allCity(Object nameCity){
         Session session =null;
-        List list = new ArrayList();
+        ArrayList<Object> query = null;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            Query query = session.createQuery("select nameCity from CityEntity ");
-            for (Object a : query.list()) {
-                list.add(a+";   ");
-            }
+            query = (ArrayList<Object>)session.createQuery("select nameCity from CityEntity ").list();
+
         }
         finally {
             if (session !=null && session.isOpen()) {
                 session.close();
             }
         }
-        StringBuffer builder = new StringBuffer();
-        for (Object o : list) {
-            builder.append(o);
-        }
-        String s = builder.substring(0);
-        return new AllCity(s);
+
+        return new AllCity(query);
     }
 
 }

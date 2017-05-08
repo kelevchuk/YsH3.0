@@ -14,18 +14,20 @@
         <property name="connection.password">2577kkll</property>
 
 
-        <mapping class="entity.AddressEntity"/>
-        <mapping class="entity.AgeEntity"/>
-        <mapping class="entity.CityEntity"/>
-        <mapping class="entity.ClubEntity"/>
-        <mapping class="entity.ClubAgeEntity"/>
-        <mapping class="entity.ClubNumberEntity"/>
-        <mapping class="entity.ClubSportEntity"/>
-        <mapping class="entity.ClubTrainerEntity"/>
-        <mapping class="entity.DistrictEntity"/>
-        <mapping class="entity.NumberEntity"/>
-        <mapping class="entity.SportTypeEntity"/>
-        <mapping class="entity.TrainerEntity"/>
+        <mapping class="dao.AddressEntity"/>
+        <mapping class="dao.AgeEntity"/>
+        <mapping class="dao.CityEntity"/>
+        <mapping class="dao.ClubEntity"/>
+        <mapping class="dao.ClubAgeEntity"/>
+        <mapping class="dao.ClubNumberEntity"/>
+        <mapping class="dao.ClubSportEntity"/>
+        <mapping class="dao.ClubTrainerEntity"/>
+        <mapping class="dao.DistrictEntity"/>
+        <mapping class="dao.NumberEntity"/>
+        <mapping class="dao.SectionEntity"/>
+        <mapping class="dao.SportTypeEntity"/>
+        <mapping class="dao.TrainerEntity"/>
+        <mapping class="dao.TrainerSportEntity"/>
 
 
         <!--<property name="connection.username">postgres</property>-->

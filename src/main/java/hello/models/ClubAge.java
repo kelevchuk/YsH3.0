@@ -4,13 +4,13 @@ package hello.models;
  * Created by LevchukK.E. on 04.05.17.
  */
 public class ClubAge {
-    private  final String club;
+    private  final Object club;
 
-    public ClubAge(String club) {
+    public ClubAge(Object club) {
         this.club = club;
     }
 
-    public String getClub() {
+    public Object getClub() {
         return club;
     }
 }

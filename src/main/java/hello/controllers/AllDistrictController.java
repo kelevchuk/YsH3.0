@@ -17,29 +17,23 @@ import java.util.List;
 @RestController
 public class AllDistrictController {
     @RequestMapping("/alldistrict")
-    public AllDistricts allDistricts(@RequestParam(defaultValue ="1", value = "city") String city){
+    public AllDistricts allDistricts(@RequestParam(defaultValue ="1", value = "city") Object city){
 
         Session session =null;
-        List list = new ArrayList();
+        ArrayList<Object> query = null;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            Query query = session.createQuery("select nameDistrict from DistrictEntity");
-            for (Object a : query.list()) {
-                list.add(a+";   ");
-            }
+            query = (ArrayList<Object>) session.createQuery("select nameDistrict from DistrictEntity").list();
+
         }
         finally {
             if (session !=null && session.isOpen()) {
                 session.close();
             }
         }
-        StringBuffer builder = new StringBuffer();
-        for (Object o : list) {
-            builder.append(o);
-        }
-        String s = builder.substring(0);
-        return new AllDistricts(s);
+
+        return new AllDistricts(query);
 
         }
     }

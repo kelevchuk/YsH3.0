@@ -1,7 +1,6 @@
 package hello.controllers;
 
 import hello.HibernateUtil;
-import hello.models.AllClubs;
 import hello.models.AllSports;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,31 +18,21 @@ import java.util.List;
 @RestController
 public class AllSportsController {
         @RequestMapping("/allsports")
-        public AllSports allSports(String nameSports){
+        public AllSports allSports(Object nameSports){
             Session session =null;
-            List list = new ArrayList();
+            ArrayList<Object> query = null;
             try {
-                SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
                 session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction();
-                Query query = session.createQuery("select st.nameSport from SportTypeEntity st ");
-                int i = 1;
-                for (Object a : query.list()) {
-                    list.add(i+": "+a+";   ");
-                    i++;
-                }
+                query = (ArrayList<Object>) session.createQuery("select st.nameSport from SportTypeEntity st ").list();
             }
             finally {
                 if (session !=null && session.isOpen()) {
                     session.close();
                 }
             }
-            StringBuffer builder = new StringBuffer();
-            for (Object o : list) {
-                builder.append(o);
-            }
-            String s = builder.substring(0);
-            return new AllSports(s);
+
+            return new AllSports(query);
         }
 
     }

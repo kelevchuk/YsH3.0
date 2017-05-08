@@ -3,14 +3,20 @@ package hello.models;
 public class Greeting {
 
 
-    private final String content;
+    private final Object content;
+    private final Object sas;
 
-    public Greeting(String content) {
+    public Greeting(Object content, Object sas) {
         this.content = content;
+        this.sas = sas;
     }
 
 
-    public String getContent() {
+    public Object getContent() {
         return content;
+    }
+
+    public Object getSas() {
+        return sas;
     }
 }

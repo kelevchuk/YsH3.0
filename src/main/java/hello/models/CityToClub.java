@@ -4,10 +4,10 @@ package hello.models;
  * Created by LevchukK.E. on 21.04.17.
  */
 public class CityToClub {
-    private final String ctc;
+    private final Object ctc;
 
-    public CityToClub(String ctc) {
+    public CityToClub(Object ctc) {
         this.ctc = ctc;
     }
-    public String getCtc(){return ctc;}
+    public Object getCtc(){return ctc;}
 }
