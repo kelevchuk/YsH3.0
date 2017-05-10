@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class GreetingController {
 
     @RequestMapping("/test")
-    public Greeting greeting(Object sas,Object nesas) {
+    public Greeting greeting(Object nesas) {
 
         Session session =null;
-        ArrayList<Object> sasq = null;
         ArrayList<Object> nesasq = null;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -26,18 +25,17 @@ public class GreetingController {
 //                    "join cl.clubNumbersByIdClub cn " +
 //                    "join  cn.numberByIdNumber num " +
 //                    "where cl.idClub=2 ";
-           sasq = (ArrayList<Object>) session.createQuery("select cl.nameClub from ClubEntity cl where cl.idClub=1").list();
-           nesasq = (ArrayList<Object>) session.createQuery("select t.nameTrainer from ClubEntity cl " +
+           nesasq = (ArrayList<Object>) session.createQuery("select cl.nameClub, t.nameTrainer from ClubEntity cl " +
                    "join cl.clubTrainersByIdClub ct " +
                    "join ct.trainerByIdTrainer t" +
-                   " where cl.idClub=1").list();
+                   " where cl.idClub=1 ").list();
         }
             finally {
                 if (session !=null && session.isOpen()) {
                     session.close();
                 }
             }
-        return new Greeting(sasq,nesasq);
+        return new Greeting(nesasq);
 
     }
 }

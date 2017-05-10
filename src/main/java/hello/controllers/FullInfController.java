@@ -41,7 +41,7 @@ public class FullInfController {
                     "where ct.id=:city and cl.id=:id")
                     .setParameter("city", city)
                     .setParameter("id", id).list();
-            coach = (ArrayList)session.createQuery("select tr.nameTrainer from ClubEntity cl " +
+            coachq = (ArrayList)session.createQuery("select tr.nameTrainer from ClubEntity cl " +
                     "join cl.addressByIdClub ad " +
                     "join ad.cityByCity cit " +
                     "join cl.clubTrainersByIdClub ct " +
@@ -64,7 +64,7 @@ public class FullInfController {
             }
         }
 
-            return new FullInf(club,sport,coach,num);
+            return new FullInf(club,sport,coachq,num);
         }
     }
 

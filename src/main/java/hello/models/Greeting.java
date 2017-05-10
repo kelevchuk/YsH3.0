@@ -4,11 +4,9 @@ public class Greeting {
 
 
     private final Object content;
-    private final Object sas;
 
-    public Greeting(Object content, Object sas) {
+    public Greeting(Object content) {
         this.content = content;
-        this.sas = sas;
     }
 
 
@@ -16,7 +14,4 @@ public class Greeting {
         return content;
     }
 
-    public Object getSas() {
-        return sas;
-    }
 }

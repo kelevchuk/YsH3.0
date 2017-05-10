@@ -16,19 +16,19 @@ import java.util.ArrayList;
 public class SectionController {
     @RequestMapping("/section")
     public Section section(@RequestParam(defaultValue = "1", value = "city") Long city,
-                           @RequestParam("section") Long section, Object sections) {
+                           @RequestParam("section") Long section, Object sections, Object numberSection) {
         Session session = null;
         ArrayList<Object> sect = null;
+        ArrayList<Object> num = null;
+
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             sect = (ArrayList<Object>)session.createQuery(" " +
-                    "select club.nameClub, numb.number, addr.valueAddress, stype.nameSport, age.valueAge, sec.schedule, train.nameTrainer, trnum.number " +
+                    "select club.nameClub, addr.valueAddress, stype.nameSport, age.valueAge, sec.schedule, train.nameTrainer, trnum.number " +
                     " from SectionEntity sec " +
                     "join sec.clubSportBySectionFk cs " +
                     "join cs.clubByIdClub club " +
-                    "join club.clubNumbersByIdClub cn " +
-                    "join cn.numberByIdNumber numb " +
                     "join club.addressByIdClub addr " +
                     "join addr.cityByCity city " +
                     "join cs.sportTypeByIdSport stype " +
@@ -39,13 +39,24 @@ public class SectionController {
                     .setParameter("city",city)
                     .setParameter("section",section)
                     .list();
+            num = (ArrayList<Object>)session.createQuery("select num.number from SectionEntity sec " +
+                    "join sec.clubSportBySectionFk cs " +
+                    "join cs.clubByIdClub club " +
+                    "join club.clubNumbersByIdClub cn " +
+                    "join cn.numberByIdNumber num " +
+                    "join club.addressByIdClub addr " +
+                    "join addr.cityByCity city " +
+                    " where city.id=:city and sec.id=:section ")
+                    .setParameter("city",city)
+                    .setParameter("section",section)
+                    .list();
         } finally {
         if (session != null && session.isOpen()) {
             session.close();
         }
     }
 
-            return new Section(sect);
+            return new Section(sect, num);
 }
     }
 
